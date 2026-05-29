@@ -128,8 +128,7 @@ StudyTracker Pro uses the **Gemini API** for AI-powered study insights. This is 
 study-tracker/
 ├── manifest.json               # MV3 config, permissions, entry points
 ├── README.md
-├── CLAUDE.md                   # Project memory and build log
-│
+├                  │
 ├── background/
 │   └── background.js           # Service worker: tracking, alarms, Pomodoro state machine
 │
