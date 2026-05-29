@@ -1,88 +1,238 @@
-# StudyTracker Pro
+# 📚 StudyTracker Pro
 
-A feature-rich Chrome Extension for tracking study time, blocking distractions, and getting AI-powered study insights — all 100% locally, no account required.
+> A powerful Chrome Extension that tracks your study habits, blocks distractions, and delivers AI-powered insights — all without ever leaving your browser.
 
-## Features
+![Version](https://img.shields.io/badge/version-1.0.0-indigo?style=flat-square)
+![Manifest](https://img.shields.io/badge/Manifest-V3-blue?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+![Privacy](https://img.shields.io/badge/data-100%25%20local-orange?style=flat-square)
 
-1. **Time Tracking** — Automatically tracks active time per website. Pauses on idle (2 min), tab switch, or window minimize.
-2. **Smart Site Categorization** — Auto-tags sites into Study, Video Learning, Coding, Distraction, Research, Communication, and Entertainment. Fully customizable.
-3. **Pomodoro Timer** — Customizable work/break durations with break type suggestions (eye rest, hydration, breathing, walk). Snooze and skip controls.
-4. **Goals & Streaks** — Daily and weekly study goals with progress bars. Subject-specific goals. Streak counter for consecutive goal days.
-5. **Dashboard & Analytics** — Today view with pie chart and bar chart. Weekly heatmap. Session history list. Dark/Light mode.
-6. **Distraction Blocking** — Three modes: Off, Gentle (10s overlay), Strict (hard block). Configurable alert threshold. Whitelist manager.
-7. **AI Insights (Gemini)** — Weekly pattern analysis, subject balance alerts, smart schedule suggestions, and end-of-day summaries. Bring your own free Gemini API key.
-8. **Subject Tagging** — Tag sessions with subjects (Math, DSA, Physics, etc.). Auto-suggest from URL/page title. Time breakdown per subject.
-9. **Smart Notifications** — Break reminders, goal progress alerts, daily report, inactivity nudge, subject balance alerts. All individually toggleable.
-10. **Data Export** — Export all data as JSON or sessions as CSV. Clear today's data or all history.
-11. **Settings & Onboarding** — Guided 4-step onboarding. Full settings panel with Pomodoro, goals, notifications, blocking, categories, AI, and appearance.
+---
 
-## Installation
+## ✨ Features
 
-1. Download or clone this repository
-2. Open Chrome and navigate to `chrome://extensions`
-3. Enable **Developer mode** (toggle in the top-right corner)
-4. Click **Load unpacked** and select the `study-tracker` folder
-5. The 📚 extension icon appears in your Chrome toolbar
-6. Click it to open the popup — a short onboarding wizard will guide you through setup
+### ⏱️ Smart Time Tracking
+- Tracks **active time** per website — pauses automatically when you go idle, switch windows, or step away
+- Idle detection with a 2-minute threshold using the `chrome.idle` API
+- Session-based tracking with start/end timestamps saved locally
 
-## Getting a Gemini API Key (for AI features)
+### 🏷️ Automatic Site Categorization
+- 80+ websites pre-mapped into 7 categories: **Study, Video Learning, Coding, Research, Communication, Distraction, Entertainment**
+- Keyword-pattern fallback for unknown URLs (e.g. URLs containing "learn", "course", "edu")
+- Fully customizable — reassign any site to any category from Settings
 
-1. Visit [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
-2. Sign in with your Google account
-3. Click **Create API Key**
-4. Copy the key and paste it in **Settings → AI Insights**
-5. Your key is stored locally and never sent anywhere except the Gemini API
+### 🍅 Pomodoro & Break System
+- Customizable Pomodoro timer (default: 25 min work / 5 min break)
+- Rotating break types: 👀 Eye Rest → 💧 Hydration → 🧘 Breathing → 🚶 Walk
+- After 4 Pomodoros, automatically suggests a 15-min long break
+- Snooze (+2 min) and Skip options per break
+- All timing powered by `chrome.alarms` — survives service worker restarts
 
-## File Structure
+### 🎯 Goals & Streaks
+- Set a **daily study goal** and **subject-specific goals**
+- Weekly goal tracking with progress bars
+- 🔥 Streak counter — tracks consecutive days your goal was hit
+- Notifications at 50% and 100% goal completion
+
+### 📊 Dashboard & Analytics
+- **Today view:** total study time, distraction time, productive percentage
+- **Pie chart** — time breakdown by category
+- **Bar chart** — top 5 most-visited sites today
+- **Weekly heatmap** — 7-day study intensity grid
+- **Session history** — last 5 sessions with domain, category, and duration
+- Dark / Light mode toggle with persistent preference
+
+### 🚨 Distraction Blocking
+- **Gentle mode** — full-page overlay with a 10-second countdown before access
+- **Strict mode** — hard block with no bypass during active Focus Sessions
+- Customizable alert threshold (default: 10 min on distraction site)
+- Whitelist manager — sites that are never blocked (Google Meet, Zoom, etc.)
+- Daily **Distraction Score** (0–100) shown as a color-coded badge
+
+### 🤖 AI-Powered Insights (Gemini API)
+- **Weekly Analysis** — identifies productive days, trends, and patterns
+- **Subject Balance** — flags neglected subjects and suggests redistribution
+- **Smart Schedule** — generates an optimal study timetable for tomorrow
+- **Daily Summary** — end-of-day recap with encouragement
+- Responses cached for 1 hour to avoid unnecessary API calls
+- Requires your own Gemini API key (free at [aistudio.google.com](https://aistudio.google.com/app/apikey))
+
+### 📋 Subject Tagging
+- Auto-suggests subject based on the site you're on (LeetCode → DSA, etc.)
+- Manual override via dropdown in the popup
+- Time breakdown per subject — today, this week, all-time
+
+### 🔔 Smart Notifications
+- Break reminders, goal progress alerts, inactivity nudges
+- Daily report at a configurable time (default: 10 PM)
+- Subject balance alerts if a subject is neglected for 3+ days
+- All notifications individually toggleable in Settings
+
+### 🗂️ Data & Privacy
+- **100% local storage** via `chrome.storage.local` — no servers, no accounts, no telemetry
+- Export your data as **JSON** or **CSV**
+- Clear history by day, week, or all-time
+- Storage usage indicator in Settings
+
+### ⚙️ Full Settings Panel
+- Pomodoro durations, goal targets, notification preferences
+- Block mode & whitelist management
+- Custom site category overrides
+- Accent color themes (Indigo, Teal, Rose, Amber, Emerald)
+- Gemini API key manager with live test button
+
+---
+
+## 🚀 Installation
+
+Since this extension is not yet on the Chrome Web Store, install it manually via Developer Mode:
+
+1. Download or clone this repository:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/study-tracker-pro.git
+   ```
+
+2. Open Chrome and go to:
+   ```
+   chrome://extensions
+   ```
+
+3. Enable **Developer Mode** (toggle in the top-right corner)
+
+4. Click **"Load Unpacked"**
+
+5. Select the `study-tracker` folder from the cloned repository
+
+6. The extension icon will appear in your Chrome toolbar — pin it for easy access
+
+---
+
+## 🤖 Setting Up AI Insights (Optional)
+
+StudyTracker Pro uses the **Gemini API** for AI-powered study insights. This is completely optional — all other features work without it.
+
+1. Get a free API key at [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+2. Click the extension icon → open **Settings**
+3. Scroll to the **AI Insights** section
+4. Paste your API key and click **Save**
+5. Use the **Test** button to verify it works
+6. Go to the popup → **AI Insights tab** → click **Get Insights**
+
+> Your API key is stored only in `chrome.storage.local` on your device. It is never sent anywhere except directly to the Gemini API.
+
+---
+
+## 🗂️ File Structure
 
 ```
 study-tracker/
-├── manifest.json              MV3 manifest with all permissions
+├── manifest.json               # MV3 config, permissions, entry points
+├── README.md
+├── CLAUDE.md                   # Project memory and build log
+│
 ├── background/
-│   └── background.js          Service worker: tracking, alarms, Pomodoro, notifications
+│   └── background.js           # Service worker: tracking, alarms, Pomodoro state machine
+│
 ├── popup/
-│   ├── popup.html             Main dashboard
-│   ├── popup.js               Dashboard logic, charts, AI panel
-│   └── popup.css              Dark/light theme, all UI styles
+│   ├── popup.html              # Main extension UI
+│   ├── popup.js                # Dashboard logic, charts, AI panel
+│   └── popup.css               # Styles, dark/light themes, animations
+│
 ├── content/
-│   └── content.js             Distraction overlay + strict block redirect
+│   └── content.js              # Injected into pages for distraction blocking
+│
 ├── settings/
-│   ├── settings.html          Full settings page (8 sections)
-│   ├── settings.js            Settings logic
-│   └── settings.css           Settings styles
-├── onboarding/
-│   ├── onboarding.html        4-step first-run wizard
-│   ├── onboarding.js          Wizard logic
-│   └── onboarding.css         Wizard styles
+│   ├── settings.html           # Full settings page (8 sections)
+│   ├── settings.js             # Settings logic and storage sync
+│   └── settings.css            # Settings page styles
+│
 ├── blocked/
-│   ├── blocked.html           Strict block page
+│   ├── blocked.html            # Standalone strict-block page
 │   ├── blocked.js
 │   └── blocked.css
+│
+├── onboarding/
+│   ├── onboarding.html         # First-install 4-step wizard
+│   ├── onboarding.js
+│   └── onboarding.css
+│
 ├── utils/
-│   ├── categorizer.js         Site category lookup (~50 sites + pattern matching)
-│   ├── storage.js             Storage schema, helpers, export functions
-│   ├── notifications.js       chrome.notifications helpers
-│   ├── subjects.js            Subject auto-suggest + stats
-│   └── gemini.js              Gemini API client + prompt builders
+│   ├── storage.js              # Storage schema, helpers, export functions
+│   ├── categorizer.js          # 80+ site category map + URL pattern fallback
+│   ├── subjects.js             # Subject list, auto-suggest, subject stats
+│   ├── notifications.js        # All chrome.notifications helpers
+│   └── gemini.js               # Gemini API integration + prompt builder
+│
 ├── icons/
 │   ├── icon16.png
 │   ├── icon48.png
 │   └── icon128.png
+│
 └── libs/
-    └── chart.min.js           Chart.js (local, no CDN)
+    └── chart.min.js            # Chart.js 4.4.1 (local, no CDN)
 ```
 
-## Tech Stack
+---
 
-- **Manifest V3** Chrome Extension
-- **Vanilla JavaScript** (no frameworks)
-- **Chart.js** for dashboard visualizations
-- **chrome.storage.local** for all data persistence
-- **chrome.alarms** for Pomodoro/break/daily report timers
-- **chrome.notifications** for alerts
-- **chrome.idle** for inactivity detection
-- **Gemini API** for AI insights (user provides their own key)
+## 🛠️ Tech Stack
 
-## Privacy
+| Layer | Technology |
+|---|---|
+| Extension Standard | Chrome Manifest V3 |
+| Language | Vanilla JavaScript (ES Modules) |
+| Charts | Chart.js 4.4.1 (local) |
+| Storage | chrome.storage.local |
+| Timers | chrome.alarms API |
+| Notifications | chrome.notifications API |
+| Idle Detection | chrome.idle API |
+| AI | Google Gemini API (gemini-2.0-flash) |
+| Styling | Custom CSS with CSS variables |
 
-All data is stored **100% locally** using `chrome.storage.local`. No data is ever sent to any server. The only external network call is to Google's Gemini API when you click "Get Insights" — and only if you have provided your own API key. No analytics, no telemetry, no account required.
+---
+
+## 🔒 Privacy
+
+- **No account required.** No sign-in, no registration.
+- **No external servers.** All data stays on your device in `chrome.storage.local`.
+- **No telemetry.** Nothing is tracked, logged, or reported anywhere.
+- **No third-party scripts.** Chart.js is bundled locally — no CDN calls.
+- The only outbound network request is to the **Gemini API**, only when you explicitly click "Get Insights", and only if you have added your own API key.
+
+---
+
+## 📸 Screenshots
+
+> Coming soon — load the extension and explore!
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Chrome Web Store publication
+- [ ] Firefox / Edge support
+- [ ] Google Calendar integration for scheduled study blocks
+- [ ] Export to PDF study reports
+- [ ] Cloud sync (optional, opt-in)
+- [ ] Mobile companion app
+
+---
+
+## 📄 License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+## 🙌 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m 'Add your feature'`
+4. Push to the branch: `git push origin feature/your-feature`
+5. Open a Pull Request
+
+---
+
+<p align="center">Built with ☕ and a desire to actually focus for once.</p>
