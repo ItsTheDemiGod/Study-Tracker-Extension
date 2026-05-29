@@ -1,0 +1,311 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #0f0f1a;
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ob-page {
+  width: 520px;
+  max-width: 96vw;
+  padding: 48px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ── Progress dots ───────────────────────────────────────────────────────────── */
+
+.ob-progress {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 44px;
+}
+
+.ob-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #252540;
+  transition: background 0.2s, transform 0.2s;
+}
+.ob-dot.done   { background: #4f46e5; }
+.ob-dot.active { background: #6366f1; transform: scale(1.35); }
+
+/* ── Step wrapper ────────────────────────────────────────────────────────────── */
+
+.ob-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  width: 100%;
+  animation: fadeIn 0.25s ease;
+}
+
+.ob-step.hidden { display: none; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Step 0: Welcome ─────────────────────────────────────────────────────────── */
+
+.ob-logo {
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.ob-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #e2e8f0;
+  line-height: 1.25;
+}
+
+.ob-subtitle {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.65;
+  max-width: 360px;
+}
+
+.ob-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+  margin: 8px 0;
+}
+
+.ob-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1a1a2e;
+  border: 1px solid #252540;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.ob-feat-icon { font-size: 16px; flex-shrink: 0; }
+
+/* ── Steps 1–3 titles ────────────────────────────────────────────────────────── */
+
+.ob-step-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.ob-step-desc {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.65;
+  max-width: 380px;
+}
+
+/* ── Goal input ──────────────────────────────────────────────────────────────── */
+
+.ob-goal-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1a1a2e;
+  border: 1px solid #252540;
+  border-radius: 14px;
+  padding: 18px 28px;
+}
+
+.ob-input {
+  background: #252540;
+  border: 1px solid #2d2d50;
+  border-radius: 9px;
+  padding: 10px 14px;
+  color: #e2e8f0;
+  font-size: 28px;
+  font-weight: 700;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+  text-align: center;
+}
+.ob-input:focus { border-color: #6366f1; }
+
+.ob-input-num { width: 80px; }
+.ob-unit      { font-size: 14px; color: #475569; }
+
+/* ── Subject checkboxes ──────────────────────────────────────────────────────── */
+
+.ob-subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 400px;
+}
+
+.ob-subject {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+}
+
+.ob-subject input { display: none; }
+
+.ob-subject span {
+  background: #1a1a2e;
+  border: 1px solid #252540;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  user-select: none;
+}
+
+.ob-subject input:checked + span {
+  background: rgba(99,102,241,0.15);
+  border-color: #6366f1;
+  color: #e2e8f0;
+}
+
+/* ── Block mode ──────────────────────────────────────────────────────────────── */
+
+.ob-block-options {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ob-block-opt { cursor: pointer; }
+.ob-block-opt input { display: none; }
+
+.ob-block-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background: #1a1a2e;
+  border: 2px solid #252540;
+  border-radius: 14px;
+  padding: 18px 20px;
+  width: 130px;
+  transition: border-color 0.15s, background 0.15s;
+  cursor: pointer;
+}
+
+.ob-block-opt:hover .ob-block-card { background: #252540; }
+.ob-block-opt input:checked + .ob-block-card {
+  border-color: #6366f1;
+  background: rgba(99,102,241,0.1);
+}
+
+.ob-block-icon { font-size: 28px; margin-bottom: 4px; }
+.ob-block-card strong { font-size: 13px; font-weight: 600; color: #e2e8f0; }
+.ob-block-card span   { font-size: 11px; color: #475569; text-align: center; line-height: 1.4; }
+
+/* ── AI step ─────────────────────────────────────────────────────────────────── */
+
+.ob-ai-icon { font-size: 48px; line-height: 1; }
+
+.ob-input-full {
+  width: 100%;
+  max-width: 420px;
+  background: #252540;
+  border: 1px solid #2d2d50;
+  border-radius: 9px;
+  padding: 11px 14px;
+  color: #e2e8f0;
+  font-size: 13px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  letter-spacing: 0.02em;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.ob-input-full:focus { border-color: #6366f1; }
+
+.ob-link {
+  font-size: 12px;
+  color: #6366f1;
+  text-decoration: none;
+}
+.ob-link:hover { text-decoration: underline; }
+
+/* ── Navigation ──────────────────────────────────────────────────────────────── */
+
+.ob-nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.ob-btn {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.ob-btn:hover  { background: #4f46e5; }
+.ob-btn:active { transform: scale(0.97); }
+
+.ob-btn-outline {
+  background: none;
+  color: #6366f1;
+  border: 1px solid #6366f1;
+  border-radius: 10px;
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ob-btn-outline:hover { background: rgba(99,102,241,0.1); }
+
+.ob-btn-ghost {
+  background: none;
+  color: #475569;
+  border: 1px solid #252540;
+  border-radius: 10px;
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.ob-btn-ghost:hover { color: #94a3b8; border-color: #94a3b8; }
+
+.ob-step-count {
+  font-size: 11px;
+  color: #2d2d50;
+  margin-top: 4px;
+  letter-spacing: 0.05em;
+}

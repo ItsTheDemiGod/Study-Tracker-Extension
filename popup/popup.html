@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyTracker Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div class="app" id="app" data-theme="dark">
+
+  <!-- ── Header ───────────────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-left">
+      <span class="logo-icon">📚</span>
+      <span class="app-name">StudyTracker Pro</span>
+    </div>
+    <div class="header-right">
+      <span class="today-date" id="todayDate"></span>
+      <button class="icon-btn" id="blockModeBtn" title="Distraction settings">🔓</button>
+      <button class="icon-btn" id="themeToggle" title="Toggle theme">☀️</button>
+    </div>
+  </header>
+
+  <!-- ── Live Session Card ─────────────────────────────────────────────────── -->
+  <div class="session-card">
+    <div class="session-left">
+      <div class="site-row">
+        <div class="site-icon" id="siteIcon">?</div>
+        <div class="site-info">
+          <span class="site-name" id="currentSite">—</span>
+          <span class="cat-badge" id="catBadge"></span>
+        </div>
+      </div>
+      <div class="tracking-status">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">Waiting...</span>
+      </div>
+      <select class="subject-select" id="subjectSelect" style="display:none"></select>
+    </div>
+    <div class="session-right">
+      <div class="timer-block">
+        <span class="timer-label">Session</span>
+        <span class="session-timer" id="sessionTimer">0:00</span>
+      </div>
+      <button class="focus-btn" id="focusBtn">
+        <span id="focusBtnIcon">🎯</span>
+        <span id="focusBtnText">Start Focus</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Today's Stats ─────────────────────────────────────────────────────── -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-icon">📖</span>
+      <span class="stat-val" id="studyTotal">—</span>
+      <span class="stat-lbl">Study</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">⚠️</span>
+      <span class="stat-val" id="distractTotal">—</span>
+      <span class="stat-lbl">Distraction</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">✨</span>
+      <span class="stat-val" id="productivePct">—</span>
+      <span class="stat-lbl">Productive</span>
+    </div>
+  </div>
+
+  <!-- ── Focus Score ──────────────────────────────────────────────────────── -->
+  <div class="score-strip">
+    <span class="score-strip-label">📊 Today's Focus Score</span>
+    <div class="score-strip-right">
+      <span class="score-strip-val" id="focusScoreVal">100</span>
+      <span class="score-badge score-green" id="focusScoreBadge">Focused</span>
+    </div>
+  </div>
+
+  <!-- ── Goals & Streaks ──────────────────────────────────────────────────── -->
+  <div class="section-header" style="margin-top:14px">
+    <span class="section-title">Goals &amp; Streaks</span>
+  </div>
+  <div class="goals-card">
+
+    <div class="streak-row">
+      <div class="streak-item">
+        <span class="streak-icon">🔥</span>
+        <div class="streak-info">
+          <span class="streak-count" id="streakCurrent">0</span>
+          <span class="streak-label">day streak</span>
+        </div>
+      </div>
+      <div class="streak-item">
+        <span class="streak-icon">🏆</span>
+        <div class="streak-info">
+          <span class="streak-count" id="streakLongest">0</span>
+          <span class="streak-label">best streak</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="goal-row">
+      <div class="goal-header">
+        <span class="goal-label">Daily Goal</span>
+        <span class="goal-meta" id="dailyGoalMeta">—</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="dailyGoalFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="goal-row">
+      <div class="goal-header">
+        <span class="goal-label">Weekly Goal</span>
+        <span class="goal-meta" id="weeklyGoalMeta">—</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill weekly" id="weeklyGoalFill" style="width:0%"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Pomodoro Timer ────────────────────────────────────────────────────── -->
+  <div class="section-header" style="margin-top:14px">
+    <span class="section-title">Pomodoro Timer</span>
+  </div>
+  <div class="pomo-card" id="pomoCard">
+
+    <!-- SVG ring countdown -->
+    <div class="pomo-ring-wrap">
+      <svg class="pomo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle class="ring-bg" cx="50" cy="50" r="42" fill="none" stroke-width="8"/>
+        <circle class="ring-fg" id="ringFg" cx="50" cy="50" r="42" fill="none" stroke-width="8"
+                stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="0"
+                transform="rotate(-90 50 50)"/>
+      </svg>
+      <div class="pomo-center">
+        <span class="pomo-time"       id="pomoTime">25:00</span>
+        <span class="pomo-mode-label" id="pomoModeLabel">READY</span>
+      </div>
+    </div>
+
+    <!-- Completed-Pomodoro dot indicators (4-per-cycle) -->
+    <div class="pomo-dots">
+      <span class="pomo-dot" id="pomoDot0"></span>
+      <span class="pomo-dot" id="pomoDot1"></span>
+      <span class="pomo-dot" id="pomoDot2"></span>
+      <span class="pomo-dot" id="pomoDot3"></span>
+    </div>
+
+    <!-- Break type suggestion (hidden unless in BREAK mode) -->
+    <div class="break-suggestion" id="breakSuggestion" style="display:none">
+      <span class="break-emoji" id="breakEmoji">👀</span>
+      <div class="break-text">
+        <strong id="breakLabel"></strong>
+        <span id="breakDesc"></span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="pomo-controls">
+      <button class="pomo-btn primary"   id="pomoStartBtn">▶ Start</button>
+      <button class="pomo-btn primary"   id="pomoPauseBtn"   style="display:none">⏸ Pause</button>
+      <button class="pomo-btn primary"   id="pomoResumeBtn"  style="display:none">▶ Resume</button>
+      <button class="pomo-btn secondary" id="pomoResetBtn"   style="display:none">↺ Reset</button>
+      <button class="pomo-btn snooze"    id="pomoSnoozeBtn"  style="display:none">+2m Snooze</button>
+      <button class="pomo-btn skip"      id="pomoSkipBtn"    style="display:none">Skip →</button>
+    </div>
+
+  </div>
+
+  <!-- ── Charts ────────────────────────────────────────────────────────────── -->
+  <div class="section-header" style="margin-top:14px">
+    <span class="section-title">Today's Breakdown</span>
+  </div>
+
+  <div class="chart-card">
+    <span class="chart-label">By Category</span>
+    <div class="chart-wrap">
+      <canvas id="pieChart"></canvas>
+      <div class="no-data-msg" id="noDataPie">No data yet — start browsing!</div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-top:8px">
+    <span class="chart-label">Top 5 Sites</span>
+    <div class="chart-wrap">
+      <canvas id="barChart"></canvas>
+      <div class="no-data-msg" id="noDataBar">No data yet — start browsing!</div>
+    </div>
+  </div>
+
+  <!-- ── Subject Stats ────────────────────────────────────────────────────── -->
+  <div class="section-header" style="margin-top:14px">
+    <span class="section-title">By Subject</span>
+  </div>
+  <div class="subject-list" id="subjectList"></div>
+
+  <!-- ── Session History ───────────────────────────────────────────────────── -->
+  <div class="section-header" style="margin-top:14px">
+    <span class="section-title">Recent Sessions</span>
+  </div>
+  <div class="session-list" id="sessionList"></div>
+
+  <!-- ── Weekly Heatmap ────────────────────────────────────────────────────── -->
+  <div class="section-header" style="margin-top:14px">
+    <span class="section-title">This Week</span>
+  </div>
+  <div class="week-heatmap" id="weekHeatmap"></div>
+
+  <!-- ── AI Insights ───────────────────────────────────────────────────────── -->
+  <div class="section-header" style="margin-top:14px">
+    <span class="section-title">AI Insights</span>
+  </div>
+  <div class="ai-card">
+    <div class="ai-tabs">
+      <button class="ai-tab active" data-type="weekly">📈 Weekly</button>
+      <button class="ai-tab" data-type="subject">📚 Subjects</button>
+      <button class="ai-tab" data-type="schedule">🗓 Schedule</button>
+      <button class="ai-tab" data-type="daily">☀️ Today</button>
+    </div>
+    <div class="ai-empty" id="aiEmpty">
+      <span class="ai-empty-icon">✨</span>
+      <p class="ai-empty-text">Get AI-powered insights about your study patterns.</p>
+      <button class="ai-get-btn" id="aiGetBtn">Get Insights</button>
+    </div>
+    <div class="ai-loading" id="aiLoading" style="display:none">
+      <div class="ai-spinner"></div>
+      <span>Analysing your data…</span>
+    </div>
+    <div class="ai-response" id="aiResponse" style="display:none">
+      <p class="ai-text" id="aiText"></p>
+      <div class="ai-footer">
+        <span class="ai-timestamp" id="aiTimestamp"></span>
+        <button class="ai-refresh-btn" id="aiRefreshBtn">↻ Refresh</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="../libs/chart.min.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

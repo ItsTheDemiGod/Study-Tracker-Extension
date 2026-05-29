@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "StudyTracker Pro",
+  "version": "1.0.0",
+  "description": "Track study time, block distractions, and get AI-powered insights.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "alarms",
+    "idle",
+    "notifications",
+    "activeTab",
+    "scripting",
+    "webNavigation"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "StudyTracker Pro",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "options_ui": {
+    "page": "settings/settings.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — StudyTracker Pro</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="settings-page">
+
+    <header class="s-header">
+      <span class="logo-icon">📚</span>
+      <span class="logo-name">StudyTracker Pro</span>
+      <span class="s-header-label">Settings</span>
+    </header>
+
+    <main class="s-main">
+
+      <!-- ── Section 1: Pomodoro & Timer ───────────────────────────────────────── -->
+      <section class="s-section">
+        <h2 class="s-section-title">⏱ Pomodoro &amp; Timer</h2>
+        <div class="s-row">
+          <label class="s-label" for="pomoWork">Work duration</label>
+          <div class="input-row">
+            <input type="number" id="pomoWork" min="1" max="120" class="s-input s-input-num">
+            <span class="s-unit">min</span>
+          </div>
+        </div>
+        <div class="s-row">
+          <label class="s-label" for="pomoBreak">Short break</label>
+          <div class="input-row">
+            <input type="number" id="pomoBreak" min="1" max="60" class="s-input s-input-num">
+            <span class="s-unit">min</span>
+          </div>
+        </div>
+        <div class="s-row">
+          <label class="s-label" for="pomoLongBreak">Long break</label>
+          <div class="input-row">
+            <input type="number" id="pomoLongBreak" min="5" max="60" class="s-input s-input-num">
+            <span class="s-unit">min</span>
+          </div>
+        </div>
+        <div class="s-row">
+          <label class="s-label" for="pomoInterval">Long break after</label>
+          <div class="input-row">
+            <input type="number" id="pomoInterval" min="1" max="10" class="s-input s-input-num">
+            <span class="s-unit">pomodoros</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Section 2: Goals ──────────────────────────────────────────────────── -->
+      <section class="s-section">
+        <h2 class="s-section-title">🎯 Goals</h2>
+        <div class="s-row">
+          <label class="s-label">Daily study goal</label>
+          <div class="input-row">
+            <input type="number" id="dailyGoalH" min="0" max="24" class="s-input s-input-num">
+            <span class="s-unit">h</span>
+            <input type="number" id="dailyGoalM" min="0" max="59" class="s-input s-input-num">
+            <span class="s-unit">min</span>
+          </div>
+        </div>
+        <div class="s-row">
+          <label class="s-label">Weekly study goal</label>
+          <div class="input-row">
+            <input type="number" id="weeklyGoalH" min="0" max="168" class="s-input s-input-num">
+            <span class="s-unit">h</span>
+          </div>
+        </div>
+        <div class="s-divider"></div>
+        <p class="s-subsection-title">Subject Goals <span class="s-hint">(h/day per subject)</span></p>
+        <div id="subjectGoalList" class="subject-goal-list"></div>
+        <div class="add-row">
+          <input type="text" id="newSubjectInput" class="s-input" placeholder="Add new subject…">
+          <button class="s-btn" id="addSubjectBtn">Add</button>
+        </div>
+      </section>
+
+      <!-- ── Section 3: Notifications ─────────────────────────────────────────── -->
+      <section class="s-section">
+        <h2 class="s-section-title">🔔 Notifications</h2>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="toggle-label">Break reminders</span>
+            <span class="toggle-hint">Notify when Pomodoro breaks start and end</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="notifBreaks">
+            <span class="toggle-knob"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="toggle-label">Goal progress alerts</span>
+            <span class="toggle-hint">Notify at 50% and 100% of daily goal</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="notifGoals">
+            <span class="toggle-knob"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="toggle-label">Daily report</span>
+            <span class="toggle-hint">End-of-day AI-powered study summary</span>
+          </div>
+          <div class="toggle-right">
+            <input type="number" id="dailyHour" min="0" max="23" class="s-input s-input-time">
+            <span class="s-unit">:00</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="notifDaily">
+              <span class="toggle-knob"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="toggle-label">Inactivity nudge</span>
+            <span class="toggle-hint">Remind to study if no sessions recorded today</span>
+          </div>
+          <div class="toggle-right">
+            <input type="number" id="nudgeHour" min="0" max="23" class="s-input s-input-time">
+            <span class="s-unit">:00</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="notifNudge">
+              <span class="toggle-knob"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="toggle-label">Subject balance alerts</span>
+            <span class="toggle-hint">Weekly alert for neglected subjects (Sunday 8 PM)</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="notifSubjectBalance">
+            <span class="toggle-knob"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- ── Section 4: Distraction Blocking ──────────────────────────────────── -->
+      <section class="s-section">
+        <h2 class="s-section-title">🛡️ Distraction Blocking</h2>
+        <p class="s-desc">Choose how StudyTracker handles distraction sites during a Focus Session.</p>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="blockMode" value="off">
+            <div class="radio-content">
+              <span class="radio-icon">🔓</span>
+              <div><strong>Off</strong><span class="radio-hint">No blocking — alerts only</span></div>
+            </div>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="blockMode" value="gentle">
+            <div class="radio-content">
+              <span class="radio-icon">👁️</span>
+              <div><strong>Gentle</strong><span class="radio-hint">10-second overlay with bypass option</span></div>
+            </div>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="blockMode" value="strict">
+            <div class="radio-content">
+              <span class="radio-icon">🛡️</span>
+              <div><strong>Strict</strong><span class="radio-hint">Hard block — no bypass possible</span></div>
+            </div>
+          </label>
+        </div>
+
+        <div class="s-divider"></div>
+
+        <div class="s-row">
+          <label class="s-label" for="distractThreshold">Alert threshold</label>
+          <div class="input-row">
+            <input type="number" id="distractThreshold" min="1" max="60" class="s-input s-input-num">
+            <span class="s-unit">minutes on distraction site</span>
+          </div>
+        </div>
+
+        <div class="s-divider"></div>
+
+        <p class="s-subsection-title">Whitelist <span class="s-hint">(never blocked)</span></p>
+        <ul class="whitelist-list" id="whitelistList"></ul>
+        <div class="add-row">
+          <input type="text" id="whitelistInput" class="s-input" placeholder="e.g. notion.so">
+          <button class="s-btn" id="addSiteBtn">Add</button>
+        </div>
+      </section>
+
+      <!-- ── Section 5: Site Categories ───────────────────────────────────────── -->
+      <section class="s-section">
+        <h2 class="s-section-title">🗂 Site Categories</h2>
+        <p class="s-desc">Override how specific sites are categorized. Custom rules take priority over the built-in list.</p>
+        <div id="customCatList" class="custom-cat-list"></div>
+        <div class="cat-add-row">
+          <input type="text" id="catDomainInput" class="s-input" placeholder="e.g. notion.so">
+          <select id="catSelectInput" class="s-input s-select">
+            <option value="Study">Study</option>
+            <option value="Video Learning">Video Learning</option>
+            <option value="Coding">Coding</option>
+            <option value="Research">Research</option>
+            <option value="Communication">Communication</option>
+            <option value="Distraction">Distraction</option>
+            <option value="Entertainment">Entertainment</option>
+          </select>
+          <button class="s-btn" id="addCatBtn">Add</button>
+        </div>
+      </section>
+
+      <!-- ── Section 6: AI Insights ────────────────────────────────────────────── -->
+      <section class="s-section">
+        <h2 class="s-section-title">✨ AI Insights — Gemini</h2>
+        <p class="s-desc">Enter your Gemini API key to unlock AI-powered study summaries and recommendations. Your key is stored locally and never shared.</p>
+        <div class="api-key-row">
+          <input type="password" id="geminiKeyInput" class="s-input api-key-input" placeholder="AIza…" autocomplete="off">
+          <button class="s-btn" id="saveKeyBtn">Save</button>
+          <button class="s-btn-outline" id="testKeyBtn">Test</button>
+        </div>
+        <p class="api-key-result" id="apiKeyResult"></p>
+        <a class="api-key-link" href="https://aistudio.google.com/app/apikey" target="_blank">Get a free API key →</a>
+      </section>
+
+      <!-- ── Section 7: Data & Privacy ─────────────────────────────────────────── -->
+      <section class="s-section">
+        <h2 class="s-section-title">🔒 Data &amp; Privacy</h2>
+        <p class="s-desc">All data is stored locally on your device. Nothing is ever sent to any server.</p>
+
+        <div class="storage-row">
+          <span class="storage-label">💾 Storage used</span>
+          <span class="storage-val" id="storageUsage">—</span>
+        </div>
+
+        <div class="s-divider"></div>
+
+        <div class="export-row">
+          <div class="export-info">
+            <span class="export-label">Export as JSON</span>
+            <span class="export-hint">All data in one file</span>
+          </div>
+          <button class="s-btn-outline" id="exportJsonBtn">⬇ JSON</button>
+        </div>
+        <div class="export-row">
+          <div class="export-info">
+            <span class="export-label">Export as CSV</span>
+            <span class="export-hint">Sessions spreadsheet (date, domain, duration…)</span>
+          </div>
+          <button class="s-btn-outline" id="exportCsvBtn">⬇ CSV</button>
+        </div>
+
+        <div class="s-divider"></div>
+
+        <div class="danger-row">
+          <div class="danger-info">
+            <span class="danger-label">Clear today's data</span>
+            <span class="danger-hint">Remove all sessions from today</span>
+          </div>
+          <button class="s-btn-danger-outline" id="clearTodayBtn">Clear Today</button>
+        </div>
+        <div class="danger-row">
+          <div class="danger-info">
+            <span class="danger-label">Clear all history</span>
+            <span class="danger-hint">Delete ALL study data permanently</span>
+          </div>
+          <button class="s-btn-danger" id="clearAllBtn">Clear All</button>
+        </div>
+      </section>
+
+      <!-- ── Section 8: Appearance ─────────────────────────────────────────────── -->
+      <section class="s-section">
+        <h2 class="s-section-title">🎨 Appearance</h2>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <span class="toggle-label">Dark mode</span>
+            <span class="toggle-hint">Toggle dark/light theme in the popup</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="toggle-knob"></span>
+          </label>
+        </div>
+
+        <div class="s-divider"></div>
+
+        <div class="accent-row">
+          <span class="s-label">Accent color</span>
+          <div class="color-swatches" id="colorSwatches">
+            <button class="color-swatch" data-color="indigo"  style="background:#6366f1" title="Indigo"></button>
+            <button class="color-swatch" data-color="teal"    style="background:#14b8a6" title="Teal"></button>
+            <button class="color-swatch" data-color="rose"    style="background:#f43f5e" title="Rose"></button>
+            <button class="color-swatch" data-color="amber"   style="background:#f59e0b" title="Amber"></button>
+            <button class="color-swatch" data-color="emerald" style="background:#10b981" title="Emerald"></button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script src="settings.js"></script>
+</body>
+</html>

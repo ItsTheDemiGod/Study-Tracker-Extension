@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome — StudyTracker Pro</title>
+  <link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+<div class="ob-page">
+
+  <!-- Progress dots -->
+  <div class="ob-progress">
+    <span class="ob-dot" data-step="0"></span>
+    <span class="ob-dot" data-step="1"></span>
+    <span class="ob-dot" data-step="2"></span>
+    <span class="ob-dot" data-step="3"></span>
+  </div>
+
+  <!-- ── Step 0: Welcome ───────────────────────────────────────────────────── -->
+  <div class="ob-step" id="step0">
+    <div class="ob-logo">📚</div>
+    <h1 class="ob-title">Welcome to<br>StudyTracker Pro</h1>
+    <p class="ob-subtitle">Your all-in-one study companion. Track time,<br>block distractions, and get AI-powered insights.</p>
+    <div class="ob-features">
+      <div class="ob-feature"><span class="ob-feat-icon">⏱</span><span>Automatic time tracking</span></div>
+      <div class="ob-feature"><span class="ob-feat-icon">🎯</span><span>Daily goals &amp; streaks</span></div>
+      <div class="ob-feature"><span class="ob-feat-icon">🛡️</span><span>Distraction blocking</span></div>
+      <div class="ob-feature"><span class="ob-feat-icon">✨</span><span>AI study insights</span></div>
+    </div>
+    <button class="ob-btn" id="step0Next">Get Started →</button>
+    <p class="ob-step-count">Step 1 of 4</p>
+  </div>
+
+  <!-- ── Step 1: Set Your Goal ─────────────────────────────────────────────── -->
+  <div class="ob-step hidden" id="step1">
+    <h2 class="ob-step-title">Set Your Daily Goal</h2>
+    <p class="ob-step-desc">How many hours do you want to study each day?</p>
+    <div class="ob-goal-row">
+      <input type="number" id="obGoalH" min="1" max="12" value="4" class="ob-input ob-input-num">
+      <span class="ob-unit">hours / day</span>
+    </div>
+    <p class="ob-step-desc" style="margin-top:28px">Which subjects do you study?</p>
+    <div class="ob-subjects" id="obSubjects">
+      <label class="ob-subject"><input type="checkbox" value="Math" checked><span>Math</span></label>
+      <label class="ob-subject"><input type="checkbox" value="Physics"><span>Physics</span></label>
+      <label class="ob-subject"><input type="checkbox" value="DSA" checked><span>DSA</span></label>
+      <label class="ob-subject"><input type="checkbox" value="Chemistry"><span>Chemistry</span></label>
+      <label class="ob-subject"><input type="checkbox" value="English"><span>English</span></label>
+      <label class="ob-subject"><input type="checkbox" value="Biology"><span>Biology</span></label>
+      <label class="ob-subject"><input type="checkbox" value="History"><span>History</span></label>
+      <label class="ob-subject"><input type="checkbox" value="Literature"><span>Literature</span></label>
+    </div>
+    <div class="ob-nav">
+      <button class="ob-btn-outline" id="step1Back">← Back</button>
+      <button class="ob-btn" id="step1Next">Next →</button>
+    </div>
+    <p class="ob-step-count">Step 2 of 4</p>
+  </div>
+
+  <!-- ── Step 2: Block Mode ────────────────────────────────────────────────── -->
+  <div class="ob-step hidden" id="step2">
+    <h2 class="ob-step-title">Choose Block Mode</h2>
+    <p class="ob-step-desc">How should StudyTracker handle distraction sites during focus sessions?</p>
+    <div class="ob-block-options">
+      <label class="ob-block-opt">
+        <input type="radio" name="obBlockMode" value="off">
+        <div class="ob-block-card">
+          <span class="ob-block-icon">🔓</span>
+          <strong>Off</strong>
+          <span>Track only — no blocking</span>
+        </div>
+      </label>
+      <label class="ob-block-opt">
+        <input type="radio" name="obBlockMode" value="gentle" checked>
+        <div class="ob-block-card">
+          <span class="ob-block-icon">👁️</span>
+          <strong>Gentle</strong>
+          <span>10-second overlay with bypass</span>
+        </div>
+      </label>
+      <label class="ob-block-opt">
+        <input type="radio" name="obBlockMode" value="strict">
+        <div class="ob-block-card">
+          <span class="ob-block-icon">🛡️</span>
+          <strong>Strict</strong>
+          <span>Hard block, no bypass</span>
+        </div>
+      </label>
+    </div>
+    <div class="ob-nav">
+      <button class="ob-btn-outline" id="step2Back">← Back</button>
+      <button class="ob-btn" id="step2Next">Next →</button>
+    </div>
+    <p class="ob-step-count">Step 3 of 4</p>
+  </div>
+
+  <!-- ── Step 3: Gemini Key ────────────────────────────────────────────────── -->
+  <div class="ob-step hidden" id="step3">
+    <div class="ob-ai-icon">✨</div>
+    <h2 class="ob-step-title">Unlock AI Insights</h2>
+    <p class="ob-step-desc">Add a free Gemini API key to get personalized AI coaching based on your study patterns. You can skip this and add it later in Settings.</p>
+    <input type="password" id="obGeminiKey" class="ob-input-full"
+           placeholder="Paste your Gemini API key here (optional)" autocomplete="off">
+    <a class="ob-link" href="https://aistudio.google.com/app/apikey" target="_blank">
+      Get a free key at aistudio.google.com →
+    </a>
+    <div class="ob-nav">
+      <button class="ob-btn-outline" id="step3Back">← Back</button>
+      <button class="ob-btn-ghost"   id="step3Skip">Skip</button>
+      <button class="ob-btn"         id="step3Finish">Let's Go! 🚀</button>
+    </div>
+    <p class="ob-step-count">Step 4 of 4</p>
+  </div>
+
+</div>
+<script src="onboarding.js"></script>
+</body>
+</html>
